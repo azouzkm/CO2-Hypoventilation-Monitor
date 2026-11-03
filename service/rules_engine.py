@@ -200,6 +200,10 @@ class Monitor:
             "cr1": s.get("cr1"),
             "cr1_why": s.get("cr1_why"),
             "cr1_since": self.cr1_since,
+            "rr": s.get("rr"),                 # CR-4: breaths per minute, None while none is shown
+            "rr_why": s.get("rr_why"),         # ... and why not
+            "advisory_why": s.get("advisory"),
+            "line": s.get("line"),             # CR-3: True while the sampling line is on, None if unknown
             "why": s.get("why") or (alarm or {}).get("reason"),
             "alarm": s.get("alarm"),
             "acked": bool(s.get("acked")),

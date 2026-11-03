@@ -57,8 +57,8 @@ class Service:
         self._last_text = None         # (board time, row id) of the last reading taken from a text line
         self.history = deque(maxlen=int(cfg["history_s"] * 2) + 10)
         if preload:                    # a restart mid-session keeps the trend on screen
-            for ts, ppm, display, cr1 in self.store.readings_since(self.started_at - cfg["history_s"]):
-                self.history.append((ts, ppm, display, cr1))
+            for row in self.store.readings_since(self.started_at - cfg["history_s"]):
+                self.history.append(tuple(row))          # (time, ppm, display, cr1, breathing rate)
         self.source = source_factory(self.on_line, self.on_status)
         self._stop = threading.Event()
         self._ticker = threading.Thread(target=self._tick_loop, daemon=True, name="link-watchdog")
@@ -131,7 +131,7 @@ class Service:
                 rowid = self.store.add_reading(now, d, quality(d))
                 if d["source"] == "text":
                     self._last_text = (d["t"], rowid)
-                self.history.append((now, d["ppm"], d["show"], d["cr1"]))
+                self.history.append((now, d["ppm"], d["show"], d["cr1"], d.get("rr")))
             elif d["kind"] == "banner":
                 events = self.monitor.on_banner(now, d["text"])
                 self.store.add_device_event(now, d["text"])
@@ -190,9 +190,10 @@ class Service:
         return v
 
     def readings(self, seconds: float) -> list:
+        """[time, ppm, display, breathing rate per minute or None] for the trend charts."""
         since = self.clock() - seconds
         with self.lock:
-            return [[round(ts, 3), ppm, display] for ts, ppm, display, _ in self.history if ts >= since]
+            return [[round(ts, 3), ppm, display, rr] for ts, ppm, display, _, rr in self.history if ts >= since]
 
     def alarms(self, limit: int = 20) -> list:
         return self.store.alarms(limit)
