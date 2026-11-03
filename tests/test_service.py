@@ -63,6 +63,31 @@ def test_terminal_codes_and_clock_prefixes_are_removed():
     assert quality(sample(1, None, "FAULT", "TECHNICAL")) == "no_answer"
 
 
+def js6(t, ppm, cr1, alarm, rr=None, rr_why="no exhaled CO2", line=True, advisory=None, **k):
+    """One JSON line as firmware v0.6 prints it: with the breathing rate (CR-4) and the safety clip (CR-3)."""
+    d = json.loads(js(t, ppm, cr1, alarm, **k))
+    d.update({"v": "0.6", "rr": rr, "rr_why": rr_why, "line": line, "advisory": advisory})
+    return json.dumps(d)
+
+
+def test_the_breathing_rate_and_the_sampling_line_are_read_from_both_lines():
+    s = parse_line(js6(400, 1800, "PRESENT", "NORMAL", rr=15.2, rr_why=""))
+    assert s["rr"] == 15.2 and s["line"] is True and s["fw"] == "0.6"
+    s = parse_line(js6(401, 1100, "ABSENT", "TECHNICAL", line=False))
+    assert s["rr"] is None and s["rr_why"] == "no exhaled CO2" and s["line"] is False
+    s = parse_line(js6(402, 1800, "PRESENT", "ADVISORY", rr=6.1, rr_why="", advisory="breathing slowed to 6.1/min"))
+    assert s["advisory"] == "breathing slowed to 6.1/min"
+    assert parse_line(js(3, 900, "PRESENT", "NORMAL"))["line"] is None              # v0.5: not reported
+    t = parse_line("t=  290 s  CO2  1099 ppm  |#####.....|  ABSENT     STANDBY      RR --   ")
+    assert t["rr"] is None and t["line"] is True
+    t = parse_line("t=  291 s  CO2  1650 ppm  |#######...|  PRESENT    NORMAL       RR 12.5 ")
+    assert t["rr"] == 12.5 and t["line"] is True
+    t = parse_line("t=  292 s  CO2  1099 ppm  |#####.....|  ABSENT     TECHNICAL    RR --   LINE OFF")
+    assert t["line"] is False and t["alarm"] == "TECHNICAL"
+    old = parse_line("t=  312 s  CO2  1814 ppm  |##########....................|  PRESENT    NORMAL")
+    assert old["rr"] is None and old["line"] is None                                  # older firmware
+
+
 # ---- rules engine -------------------------------------------------------------------------------
 def feed(m, t0, t1, *a, **k):
     out = []
@@ -185,6 +210,34 @@ def test_store_links_acks_to_their_alarm(tmp_path):
     assert a[0]["acks"] == [{"ts": pytest.approx(101.0), "who": "AM", "method": "dashboard", "confirmed": True}]
 
 
+def test_the_breathing_rate_and_the_line_are_recorded_with_each_reading(tmp_path):
+    """CR-4: the rate is recorded through the procedure, not only shown."""
+    import sqlite3
+    path = str(tmp_path / "rr.sqlite")
+    st = Store(path)
+    st.add_reading(100.0, parse_line(js6(1, 1800, "PRESENT", "NORMAL", rr=14.8, rr_why="")), "ok")
+    st.add_reading(101.0, parse_line(js6(2, 1100, "ABSENT", "TECHNICAL", line=False)), "ok")
+    st.add_reading(102.0, parse_line(js(3, 900, "PRESENT", "NORMAL")), "ok")           # v0.5
+    st.close()
+    rows = sqlite3.connect(path).execute("SELECT rr, rr_why, line FROM readings ORDER BY id").fetchall()
+    assert rows == [(14.8, "", 1), (None, "no exhaled CO2", 0), (None, None, None)]
+    assert [r[4] for r in Store(path).readings_since(0)] == [14.8, None, None]
+
+
+def test_an_older_database_gets_the_rate_and_line_columns(tmp_path):
+    import sqlite3
+    path = str(tmp_path / "old.sqlite")
+    db = sqlite3.connect(path)
+    db.execute("CREATE TABLE readings (id INTEGER PRIMARY KEY, ts_utc TEXT NOT NULL, t_board INTEGER, ppm INTEGER, "
+               "cr1 TEXT, alarm TEXT, display TEXT, acked INTEGER, quality TEXT, fw TEXT)")
+    db.execute("INSERT INTO readings (ts_utc, ppm) VALUES ('2026-10-25T01:00:00.000+00:00', 1500)")
+    db.commit()
+    db.close()
+    st = Store(path)
+    st.add_reading(2e9, parse_line(js6(1, 1800, "PRESENT", "NORMAL", rr=12.0, rr_why="")), "ok")
+    assert [(r[1], r[4]) for r in st.readings_since(0)] == [(1500, None), (1800, 12.0)]
+
+
 # ---- the service and its REST layer -------------------------------------------------------------
 def test_the_service_reads_the_shared_config_json():
     from service.core import load_config
@@ -261,12 +314,36 @@ def test_rest_layer_end_to_end(tmp_path):
 
     pts = client.get("/api/readings?seconds=600").get_json()["points"]
     assert len(pts) == 12 and pts[-1][1] == 900 and pts[-1][2] == "CRITICAL ACK"   # one per second, not two
+    assert latest["rr"] is None and latest["line"] is None                         # v0.5 reports neither
 
     now[0] = 1020.0                                                      # cable pulled
     svc.tick()
     latest = client.get("/api/latest").get_json()
     assert latest["link"] == "lost" and latest["display"] == "LINK LOST" and latest["state"] == "technical"
     assert any("TECHNICAL: no data from the monitor" in e for e in echoed)
+
+
+def test_the_dashboard_gets_the_breathing_rate_and_the_sampling_line(tmp_path):
+    now = [2000.0]
+    svc, client, _ = make_service(tmp_path, now)
+    page = client.get("/").data.decode("utf-8")
+    assert 'id="rr"' in page and 'id="lineState"' in page and 'id="rateChart"' in page
+    for t in range(5):
+        now[0] = 2000.0 + t
+        svc.on_line("t=%5d s  CO2  1800 ppm  |#####|  PRESENT    NORMAL       RR 15.2 " % t, now[0])
+        svc.on_line(js6(t, 1800, "PRESENT", "NORMAL", rr=15.2, rr_why=""), now[0])
+    latest = client.get("/api/latest").get_json()
+    assert latest["rr"] == 15.2 and latest["line"] is True and latest["display"] == "NORMAL"
+    pts = client.get("/api/readings?seconds=60").get_json()["points"]
+    assert len(pts) == 5 and all(p[3] == 15.2 for p in pts)
+    now[0] = 2005.0                                                       # the safety clip opens
+    svc.on_line(js6(5, 1100, "ABSENT", "TECHNICAL", line=False,
+                    why="LINE OFF: sampling line disconnected (safety clip open)"), now[0])
+    latest = client.get("/api/latest").get_json()
+    assert latest["line"] is False and latest["display"] == "TECHNICAL" and latest["rr"] is None
+    assert latest["why"].startswith("LINE OFF") and latest["state"] == "technical"   # a fault, never apnoea
+    alarms = client.get("/api/alarms").get_json()["alarms"]
+    assert alarms[0]["priority"] == "TECHNICAL" and alarms[0]["reason"].startswith("LINE OFF")
 
 
 def test_the_25_oct_alarm_test_replayed_through_the_service(tmp_path):

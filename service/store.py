@@ -1,6 +1,7 @@
 """The SQLite database (interface IF-7): one file, write-ahead logging, one writer (the ingest thread).
 
-    readings       one row per reading from the board
+    readings       one row per reading from the board, with the breathing rate (CR-4) and whether
+                   the sampling line was on (CR-3)
     alarm_events   every alarm, from the board or from the link watchdog: when it started and ended
     acks           who acknowledged which alarm, how (bedside button or dashboard), and when
     device_events  the board's banner lines (state changes, button presses), for the record
@@ -87,8 +88,11 @@ CREATE TABLE IF NOT EXISTS calibrations (
 );
 """
 
-# Columns added for the notifier (26 Oct). Added to older database files when they are opened.
+# Columns added later, to older database files when they are opened: for the notifier (26 Oct), and
+# the breathing rate (CR-4, in breaths per minute, NULL while none is shown, with the reason) and the
+# sampling line (CR-3: 1 on, 0 off, NULL from firmware without the safety clip) on 2 Nov.
 ADDED_COLUMNS = {
+    "readings": (("rr", "REAL"), ("rr_why", "TEXT"), ("line", "INTEGER")),
     "users": (("channel", "TEXT"), ("apikey", "TEXT"), ("telegram", "TEXT"),
               ("level", "INTEGER DEFAULT 1"), ("optout_ts", "TEXT")),
     "notifications": (("kind", "TEXT"), ("text", "TEXT"), ("attempts", "INTEGER DEFAULT 0"),
@@ -143,10 +147,11 @@ class Store:
     def add_reading(self, now: float, s: dict, quality: str) -> int:
         with self._lock:
             cur = self._db.execute(
-                "INSERT INTO readings (ts_utc, t_board, ppm, cr1, alarm, display, acked, quality, fw) "
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                "INSERT INTO readings (ts_utc, t_board, ppm, cr1, alarm, display, acked, quality, fw, rr, rr_why, line) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 (iso(now), s.get("t"), s.get("ppm"), s.get("cr1"), s.get("alarm"), s.get("show"),
-                 int(bool(s.get("acked"))), quality, s.get("fw")))
+                 int(bool(s.get("acked"))), quality, s.get("fw"), s.get("rr"), s.get("rr_why"),
+                 None if s.get("line") is None else int(bool(s.get("line")))))
             self._db.commit()
             return cur.lastrowid
 
@@ -331,11 +336,11 @@ class Store:
     def readings_since(self, since_epoch: float) -> list:
         db = self._read()
         try:
-            rows = db.execute("SELECT ts_utc, ppm, display, cr1 FROM readings WHERE ts_utc >= ? ORDER BY id",
+            rows = db.execute("SELECT ts_utc, ppm, display, cr1, rr FROM readings WHERE ts_utc >= ? ORDER BY id",
                               (iso(since_epoch),)).fetchall()
         finally:
             db.close()
-        return [[epoch(r["ts_utc"]), r["ppm"], r["display"], r["cr1"]] for r in rows]
+        return [[epoch(r["ts_utc"]), r["ppm"], r["display"], r["cr1"], r["rr"]] for r in rows]
 
     def alarms(self, limit: int = 20) -> list:
         db = self._read()

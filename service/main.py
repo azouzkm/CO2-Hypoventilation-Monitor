@@ -3,7 +3,7 @@
     GET  /               the dashboard (dashboard/index.html)
     GET  /register       the sign-up page for phone alerts (dashboard/register.html)
     GET  /api/latest     what to show and sound now: state, CO2, link, last acknowledgement
-    GET  /api/readings   ?seconds=600: [[time, ppm, display], ...] for the trend
+    GET  /api/readings   ?seconds=600: [[time, ppm, display, breaths/min or null], ...] for the trends
     GET  /api/alarms     ?limit=20: the alarm log, newest first, with acknowledgements and messages
     POST /api/ack        {"who": "AM"}: acknowledge from the dashboard
     GET  /api/users      the people signed up for phone alerts (never their keys, only the end of

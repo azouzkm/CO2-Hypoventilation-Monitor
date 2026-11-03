@@ -1,0 +1,44 @@
+21:20:39  ## RUN START label=len050-t1 rate=15 breaths=1 rest=60 cue=breathe
+21:20:39  ]0;🐍Wi-Fi: off | code.py | 9.2.9\t=   21 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:39  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 21, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:40  t=   22 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:40  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 22, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:41  t=   23 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:41  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 23, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:42  t=   24 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:42  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 24, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:43  t=   25 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:43  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 25, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:44  t=   26 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:44  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 26, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:45  t=   27 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:45  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 27, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:46  t=   28 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:46  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 28, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:47  t=   29 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:47  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 29, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:48  t=   30 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:48  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 30, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:49  t=   31 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:49  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 31, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:50  t=   32 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:50  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 32, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:51  t=   33 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:51  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 33, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:52  t=   34 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:52  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 34, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:53  t=   35 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:53  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 35, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:54  t=   36 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:54  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 36, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:55  t=   37 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:55  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 37, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:56  t=   38 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:56  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 38, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:57  t=   39 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:57  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 39, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:58  t=   40 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:58  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 40, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:59  t=   41 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+21:20:59  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 41, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+21:20:59  ## RUN ABORTED: board state was WARMING UP, not ABSENT

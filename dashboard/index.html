@@ -72,7 +72,7 @@
   .num .value { font-family: var(--num); font-weight: 700; font-size: 84px; line-height: 0.95; font-variant-numeric: tabular-nums; }
   .num .unit { color: var(--ink-2); margin-left: 8px; font-size: 20px; }
   .num.co2 .value { color: var(--co2); }
-  .num.cr1 .value { font-size: 48px; }
+  .num.cr1 .value, .num.line .value { font-size: 48px; }
   .num .sub { display: block; color: var(--ink-2); margin-top: 6px; }
 
   .trend { grid-area: trend; padding: 18px 32px 10px; border-bottom: 1px solid var(--rule); }
@@ -81,6 +81,8 @@
   .key { display: flex; flex-wrap: wrap; gap: 4px 16px; color: var(--ink-2); font-size: 14px; }
   .key span::before { content: ""; display: inline-block; width: 12px; height: 8px; border-radius: 2px; margin-right: 6px; background: var(--c); vertical-align: 1px; }
   #chart { width: 100%; height: 250px; display: block; }
+  #rateChart { width: 100%; height: 150px; display: block; }
+  .trendhead.second { margin-top: 14px; }
 
   .log { grid-area: log; padding: 18px 32px 28px; display: grid; grid-template-columns: 1fr minmax(240px, 320px); gap: 24px 48px; }
   #alarms { list-style: none; margin: 10px 0 0; padding: 0; }
@@ -162,6 +164,8 @@
   <section class="numbers" aria-label="Readings">
     <div class="num co2"><span class="label">CO₂ at the sensor</span><span class="value" id="ppm">--</span><span class="unit">ppm</span><span class="sub" id="ppmSub">Scale 400 to 5,000 ppm</span></div>
     <div class="num cr1"><span class="label">Exhaled CO₂</span><span class="value" id="cr1">--</span><span class="sub" id="cr1Sub"></span></div>
+    <div class="num rr"><span class="label">Breathing rate (from the CO₂ signal)</span><span class="value" id="rr">--</span><span class="unit">/min</span><span class="sub" id="rrSub"></span></div>
+    <div class="num line"><span class="label">Sampling line</span><span class="value" id="lineState">--</span><span class="sub" id="lineSub"></span></div>
   </section>
 
   <section class="trend" aria-label="CO2 trend">
@@ -176,6 +180,11 @@
       </div>
     </div>
     <canvas id="chart" aria-label="CO2 in ppm over the last 10 minutes"></canvas>
+    <div class="trendhead second">
+      <h2>Breathing rate per minute, last 10 minutes</h2>
+      <div class="key"><span style="--c: var(--white)">rate</span><span style="--c: var(--amber)">8/min: advisory below this</span></div>
+    </div>
+    <canvas id="rateChart" aria-label="Breathing rate per minute over the last 10 minutes"></canvas>
   </section>
 
   <section class="log">
@@ -399,8 +408,10 @@ function render() {
   current = s;
   const look = LOOK[s.display] || LOOK.UNKNOWN;
   document.documentElement.style.setProperty("--state", look.colour ? COLOUR[look.colour] : "var(--ink-3)");
-  $("word").textContent = look.word;
-  document.title = look.word + " | Team 6 CO₂ monitor";
+  const lineOff = s.line === false && s.display === "TECHNICAL";   // the safety clip is open (CR-3)
+  const word = lineOff ? "Line off" : look.word;
+  $("word").textContent = word;
+  document.title = word + " | Team 6 CO₂ monitor";
   if (s.display !== shownDisplay) {
     if (shownDisplay !== null && !(shownDisplay === "CRITICAL" && s.display === "CRITICAL ACK")) $("ackMsg").textContent = "";
     shownDisplay = s.display;
@@ -429,7 +440,11 @@ function render() {
     case "CRITICAL": line = "Check the patient and the airway."; title = "CO₂ lost"; why = s.why || ""; hint = "Check the patient and the airway, then acknowledge."; break;
     case "CRITICAL ACK": line = "Acknowledged. Sound off for 2 minutes."; title = "CO₂ lost, acknowledged"; why = s.why || ""; hint = (ackTxt ? "Acknowledged " + ackTxt + ". " : "") + "The alarm sounds again if CO₂ is still absent after 2 minutes."; break;
     case "CRITICAL BACK": line = "Breathing again. The alarm stays until someone acknowledges it."; title = "CO₂ is back"; why = "The alarm stays on until someone acknowledges it, so a stop in breathing is never missed."; break;
-    case "TECHNICAL": line = "The equipment, not the patient."; title = "Sensor problem"; why = s.why || ""; hint = "This is never shown as a patient alarm. Check the sensor and its wires."; break;
+    case "TECHNICAL":
+      line = "The equipment, not the patient."; why = s.why || "";
+      if (lineOff) { title = "Sampling line disconnected"; hint = "Reconnect the sampling line at the front of the box. A disconnected line is never shown as a patient alarm."; }
+      else { title = "Sensor problem"; hint = "This is never shown as a patient alarm. Check the sensor and its wires."; }
+      break;
     case "LINK LOST": line = "Nothing from the monitor for " + ago(s.since_rx_s || 0) + "."; title = "No data from the monitor"; why = "Nothing received for " + ago(s.since_rx_s || 0) + ". Check the USB cable."; hint = "On the bench this cable also powers the monitor: with it out, the monitor is off too."; break;
     case "NO SERVICE": line = "This page lost the laptop service."; title = "The dashboard lost the laptop service"; why = "Start it again in Terminal: bash tools/dashboard.sh"; hint = "The monitor keeps alarming on its own."; break;
     default:   // firmware older than v0.4 reports CO2 but no alarm state
@@ -469,6 +484,20 @@ function render() {
     : s.cr1 === "ABSENT" ? ((s.alarm === "CRITICAL" || s.display === "CRITICAL") ? COLOUR.red : "var(--ink-2)")
     : s.cr1 === "FAULT" ? COLOUR.cyan : "";
   $("cr1Sub").textContent = s.cr1_since && s.server_time ? "since " + clock(s.cr1_since) + " (" + ago(s.server_time - s.cr1_since) + ")" : "";
+  // breathing rate (CR-4): shown only once the board has a steady rhythm, never a guess
+  const rrKnown = s.rr != null || s.rr_why != null || s.line != null;   // firmware v0.6 and newer
+  $("rr").textContent = s.rr == null ? "--" : s.rr.toFixed(1);
+  $("rr").style.color = s.rr == null ? "var(--ink-2)" : s.rr < 8 ? COLOUR.amber : "";
+  $("rrSub").textContent = s.rr != null ? (s.rr < 8 ? "Below 8/min: slow breathing" : "Over the last 64 s")
+    : !rrKnown ? "Not reported by this monitor (firmware v0.6 and newer)"
+    : !s.rr_why ? "No steady rhythm yet"
+    : s.rr_why.startsWith("collecting") ? "Working it out: " + s.rr_why
+    : "Not shown: " + s.rr_why;
+  // sampling line (CR-3): the safety clip on the line
+  $("lineState").textContent = s.line === true ? "Connected" : s.line === false ? "OFF" : "--";
+  $("lineState").style.color = s.line === true ? COLOUR.green : s.line === false ? COLOUR.cyan : "";
+  $("lineSub").textContent = s.line === true ? "Safety clip closed" : s.line === false ? "Safety clip open: reconnect the line"
+    : "Not reported by this monitor";
   if (stale && s.server_time && s.since_rx_s != null) {
     $("ppmSub").textContent = "Last reading at " + clock(s.server_time - s.since_rx_s);
   }
@@ -500,11 +529,12 @@ async function poll() {
   } catch (e) { /* render() turns this into NO SERVICE after 4 s */ }
   render();
   drawChart();
+  drawRate();
 }
 
 // ---------------------------------------------------------------------------------------------
 // The trend: CO2 in yellow, the state as a strip of colour underneath
-let points = [];             // [time, ppm, display]
+let points = [];             // [time, ppm, display, breathing rate or null]
 const WINDOW_S = 600;
 function mergePoints(list) {
   const last = points.length ? points[points.length - 1][0] : 0;
@@ -580,6 +610,59 @@ function drawChart() {
   } else {
     x.fillStyle = "#5d6c77"; x.textAlign = "center"; x.textBaseline = "middle";
     x.fillText("No readings yet", L + pw / 2, T + ph / 2);
+  }
+}
+
+// The breathing rate (CR-4): breaths per minute, with the advisory line at 8/min. Gaps where the
+// board shows no rate (it never guesses).
+const RR_MAX = 40, RR_LOW = 8;
+function drawRate() {
+  const cv = $("rateChart"), dpr = window.devicePixelRatio || 1;
+  const W = cv.clientWidth, H = cv.clientHeight;
+  if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
+  const x = cv.getContext("2d");
+  x.setTransform(dpr, 0, 0, dpr, 0, 0);
+  x.clearRect(0, 0, W, H);
+  const L = 58, R = 12, T = 10, B = 26;
+  const pw = W - L - R, ph = H - T - B;
+  const now = (current.server_time || Date.now() / 1000);
+  const t0 = now - WINDOW_S;
+  const X = (t) => L + ((t - t0) / WINDOW_S) * pw;
+  const Y = (v) => T + ph - (Math.min(Math.max(v, 0), RR_MAX) / RR_MAX) * ph;
+  x.font = "13px " + getComputedStyle(document.body).fontFamily;
+  x.textBaseline = "middle";
+  for (const v of [0, 10, 20, 30, 40]) {
+    x.strokeStyle = "#1d2830"; x.lineWidth = 1; x.setLineDash([]);
+    x.beginPath(); x.moveTo(L, Y(v) + 0.5); x.lineTo(L + pw, Y(v) + 0.5); x.stroke();
+    x.fillStyle = "#5d6c77"; x.textAlign = "right"; x.fillText(String(v), L - 8, Y(v));
+  }
+  x.strokeStyle = COLOUR.amber; x.globalAlpha = 0.7; x.setLineDash([5, 5]);
+  x.beginPath(); x.moveTo(L, Y(RR_LOW) + 0.5); x.lineTo(L + pw, Y(RR_LOW) + 0.5); x.stroke();
+  x.setLineDash([]); x.globalAlpha = 1;
+  x.textAlign = "center"; x.textBaseline = "top";
+  for (let t = Math.ceil(t0 / 120) * 120; t <= now; t += 120) {
+    x.fillStyle = "#5d6c77"; x.fillText(hm(t), X(t), T + ph + 8);
+  }
+  const vis = points.filter((p) => p[0] >= t0 - 2);
+  x.strokeStyle = COLOUR.white; x.lineWidth = 2.2; x.lineJoin = "round";
+  x.beginPath();
+  let pen = false, any = false, lastPt = null;
+  for (let i = 0; i < vis.length; i++) {
+    const t = vis[i][0], v = vis[i][3];
+    const gap = i > 0 && t - vis[i - 1][0] > 5;
+    if (v == null || gap) { pen = false; if (v == null) continue; }
+    const px = X(t), py = Y(v);
+    if (px < L) continue;
+    if (!pen) { x.moveTo(px, py); pen = true; } else { x.lineTo(px, py); }
+    any = true; lastPt = [px, py];
+  }
+  x.stroke();
+  if (lastPt && vis.length && vis[vis.length - 1][3] != null) {
+    x.fillStyle = COLOUR.white; x.beginPath(); x.arc(lastPt[0], lastPt[1], 4, 0, Math.PI * 2); x.fill();
+  }
+  if (!any) {
+    x.fillStyle = "#5d6c77"; x.textAlign = "center"; x.textBaseline = "middle";
+    x.fillText("No breathing rate yet: it appears after about a minute of steady breathing", L + pw / 2, T + ph / 2);
   }
 }
 
@@ -699,7 +782,7 @@ async function start() {
   pollAlarms();
   setInterval(poll, 1000);
   setInterval(pollAlarms, 3000);
-  window.addEventListener("resize", drawChart);
+  window.addEventListener("resize", () => { drawChart(); drawRate(); });
   requestAnimationFrame(frame);
 }
 start();
