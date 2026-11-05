@@ -1,0 +1,119 @@
+22:12:29  ]0;🐍Wi-Fi: off | Done | 9.2.9\
+22:12:29  Code stopped by auto-reload. Reloading soon.
+22:12:30  soft reboot
+22:12:30  [2K[0GAuto-reload is on. Simply save files over USB to run them or enter REPL to disable.
+22:12:30  [2K[0Gcode.py output:
+22:12:31  ]0;🐍Wi-Fi: off | code.py | 9.2.9\
+22:12:31  Team 6 CO2 monitor v0.6 - CR-1 present/absent, the four alarm states, breathing rate, line clip, one reading per second, scale 400-5000 ppm
+22:12:32  t=   11 s  CO2   500 ppm  |#.............................|  WARMING UP STANDBY      RR --   
+22:12:32  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 11, "alarm": "STANDBY", "v": "0.6", "why": "sensor warming up", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "STANDBY", "advisory": null}
+22:12:33  t=   12 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   LINE OFF
+22:12:33  >>> SAMPLING LINE OFF (safety clip open) <<<
+22:12:33  >>> ALARM TECHNICAL: LINE OFF: sampling line disconnected (safety clip open) <<<
+22:12:33  {"line": false, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 12, "alarm": "TECHNICAL", "v": "0.6", "why": "LINE OFF: sampling line disconnected (safety clip open)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:34  t=   13 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   LINE OFF
+22:12:34  {"line": false, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 13, "alarm": "TECHNICAL", "v": "0.6", "why": "LINE OFF: sampling line disconnected (safety clip open)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:35  t=   14 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   LINE OFF
+22:12:35  {"line": false, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 14, "alarm": "TECHNICAL", "v": "0.6", "why": "LINE OFF: sampling line disconnected (safety clip open)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:36  t=   15 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   LINE OFF
+22:12:36  {"line": false, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 15, "alarm": "TECHNICAL", "v": "0.6", "why": "LINE OFF: sampling line disconnected (safety clip open)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:37  t=   16 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   LINE OFF
+22:12:37  {"line": false, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 16, "alarm": "TECHNICAL", "v": "0.6", "why": "LINE OFF: sampling line disconnected (safety clip open)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:38  t=   17 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   LINE OFF
+22:12:38  {"line": false, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 17, "alarm": "TECHNICAL", "v": "0.6", "why": "LINE OFF: sampling line disconnected (safety clip open)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:39  t=   18 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   LINE OFF
+22:12:39  {"line": false, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 18, "alarm": "TECHNICAL", "v": "0.6", "why": "LINE OFF: sampling line disconnected (safety clip open)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:40  t=   19 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   LINE OFF
+22:12:40  {"line": false, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 19, "alarm": "TECHNICAL", "v": "0.6", "why": "LINE OFF: sampling line disconnected (safety clip open)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:41  t=   20 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   LINE OFF
+22:12:41  {"line": false, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 20, "alarm": "TECHNICAL", "v": "0.6", "why": "LINE OFF: sampling line disconnected (safety clip open)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:42  t=   21 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:42  >>> SAMPLING LINE CONNECTED (safety clip closed) <<<
+22:12:42  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 21, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:43  t=   22 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:43  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 22, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:44  t=   23 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:44  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 23, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:45  t=   24 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:45  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 24, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:46  t=   25 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:46  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 25, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:47  t=   26 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:47  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 26, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:48  t=   27 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:48  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 27, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:49  t=   28 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:49  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 28, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:50  t=   29 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:50  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 29, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:51  t=   30 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:51  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 30, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:52  t=   31 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:52  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 31, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:53  t=   32 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:53  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 32, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:54  t=   33 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:54  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 33, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:55  t=   34 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:55  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 34, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:56  t=   35 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:56  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 35, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:57  t=   36 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:57  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 36, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:58  t=   37 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:58  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 37, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:12:59  t=   38 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:12:59  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 38, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:00  t=   39 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:00  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 39, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:01  t=   40 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:01  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 40, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:02  t=   41 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:02  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 41, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:03  t=   42 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:03  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 42, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:04  t=   43 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:04  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 43, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:05  t=   44 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:05  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 44, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:06  t=   45 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:06  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 45, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:07  t=   46 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:07  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 46, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:08  t=   47 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:08  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 47, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:09  t=   48 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:09  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 48, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:10  t=   49 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:10  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 49, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:11  t=   50 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:11  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 50, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:12  t=   51 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:12  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 51, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:13  t=   52 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:13  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 52, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:14  t=   53 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:14  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 53, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:15  t=   54 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:15  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 54, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:16  t=   55 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:16  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 55, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:17  t=   56 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:17  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 56, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:18  t=   57 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:18  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 57, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:19  t=   58 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:19  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 58, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:20  t=   59 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:20  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 59, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:21  t=   60 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:21  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 60, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:22  t=   61 s  CO2   500 ppm  |#.............................|  WARMING UP TECHNICAL    RR --   
+22:13:22  {"line": true, "cr1": "WARMING UP", "acked": false, "cr1_why": "sensor warming up", "latched": false, "t": 61, "alarm": "TECHNICAL", "v": "0.6", "why": "sensor back, not trusted yet (re-warming)", "press": 0, "hold": 0, "rr": null, "rr_why": "no exhaled CO2", "ppm": 500, "dash_ack": 0, "show": "TECHNICAL", "advisory": null}
+22:13:22  ]0;🐍Wi-Fi: off | Done | 9.2.9\
+22:13:22  Code stopped by auto-reload. Reloading soon.
+22:13:24  soft reboot
+22:13:24  [2K[0GAuto-reload is on. Simply save files over USB to run them or enter REPL to disable.
+22:13:24  [2K[0Gcode.py output:
+22:13:25  ]0;🐍Wi-Fi: off | code.py | 9.2.9\
+22:13:25  Team 6 CO2 monitor v0.6 - CR-1 present/absent, the four alarm states, breathing rate, line clip, one reading per second, scale 400-5000 ppm

@@ -344,3 +344,7 @@ v1 parts in `hardware/cad/`, then repeat the runs through the cap and sampling l
   checked without replugging.
 - **Open:** confirm a reading, record the wire orientation in `hardware/wiring.md`.
   (Closed 22 Oct: reading confirmed, orientation `normal`.)
+
+## 4 Nov 2026 · Key constraint: the fitted sensor is capped at 5,000 ppm
+
+- The MH-Z19C we were given reads 0-5,000 ppm and clips at exactly 5,000 in every saturated run (test 5 runs 1, 3 and 5; the breathing-rate run). Winsen makes 2,000, 5,000 and 10,000 ppm versions ("10,000 optional"); the C's manual documents only two commands (read CO2, self-calibration on/off) and no range command, so the cap is fixed in this module. Exhaled breath is about 40,000-50,000 ppm, so saturation is a sensor range limit, reported by the device as a technical fault (cyan, "the sensor cannot see breaths"). Designed fix: fixed room-air dilution (plus a 10,000 ppm module if available). See data/runs/rate_run_notes.md.
