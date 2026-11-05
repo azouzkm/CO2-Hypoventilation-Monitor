@@ -52,14 +52,14 @@ requirement (CR) it serves, and every verification result names the ER it closes
 
 | CR | Clinical requirement (project card) | Result (bench) |
 | --- | --- | --- |
-| CR&#8209;1 | Presence or absence of exhaled CO₂ confirmed within a stated number of breaths and displayed unambiguously | **Met.** ER-1: CO₂ present within 3 breaths in 10 of 10 scripted runs (6-9 s, 0.5 m line); a 2 m line adds about 16 s (test 6) |
+| CR&#8209;1 | Presence or absence of exhaled CO₂ confirmed within a stated number of breaths and displayed unambiguously | **Met for presence.** ER-1: CO₂ present within 3 breaths in 10 of 10 scripted runs (6-9 s, 0.5 m line); a 2.1 m line adds about 16 s (test 6). Absence is the CR-2 alarm |
 | CR&#8209;2 | Loss of CO₂ while the circuit reads connected raises an immediate alarm | **Met, one explained fail.** ER-2: red within 30 s of the last breath in 9 of 10 runs (median 15 s); the one fail (33 s) was while the sensor sat at its 5,000 ppm limit. Phones within 3.2 s; the box keeps alarming without the laptop |
 | CR&#8209;3 | A blocked or disconnected sampling line is reported as a fault and never presents as apnoea | **Partly met.** Disconnected line: cyan "Line off" at once, never red (ER-5, tests 2 and 3). Blocked line: shown as CO₂ lost (ER-6, test 4): no flow or pressure sensing in the kit; designed fix in the dossier |
-| CR&#8209;4 | Breathing rate from the CO₂ signal recorded through the procedure, with alarms on a sustained fall | **Partly met.** Rate recorded with every reading; resolved when breaths reach the sensor directly (22 Oct: 14.9-15.7/min, 15.0/min by peak counting, true 15/min), "not resolved" through the line and sealed cell, never a wrong rate. ADVISORY verified in simulation and recorded once on the bench (3 Nov) |
+| CR&#8209;4 | Breathing rate from the CO₂ signal recorded through the procedure, with alarms on a sustained fall | **Partly met.** Rate recorded with every reading; resolved when breaths reach the sensor directly (22 Oct: 14.9-15.7/min, 15.0/min by peak counting, true 15/min), "not resolved" through the line and sealed cell, never a falsely low rate (ER-7 not met). ADVISORY verified in simulation and recorded once on the bench (3 Nov) |
 
 | | Deliverable | Marks | Where it lives |
 | --- | --- | --- | --- |
-| D1-D4, D6-D9 | Requirements, system design, component chart, diagram set, verification plan and report, failure modes, dossier | 65 | The design dossier PDF (submitted); drafts and outline in [docs/](docs/) and [docs/D9-dossier/](docs/D9-dossier/) |
+| D1-D4, D6-D9 | Requirements, system design, component chart, diagram set, verification plan and report, failure modes, dossier | 65 | [The design dossier PDF](docs/D9-dossier/Project06_Design_Dossier_Team6.pdf) (submitted); drafts and outline in [docs/](docs/) and [docs/D9-dossier/](docs/D9-dossier/) |
 | D5 | Working system and documentation | 35 | [firmware/](firmware/), [service/](service/), [dashboard/](dashboard/), [hardware/](hardware/), [tools/](tools/), this README and the live demonstration |
 | Evidence | Raw logs, run results, calibration, figures | | [data/](data/) (`data/raw/`, `data/runs/`, `data/calibration/`), [docs/figures/](docs/figures/), [docs/screenshots/](docs/screenshots/) |
 
@@ -151,7 +151,7 @@ hardware/          wiring, bill of materials, wiring pictures, soldering guide
   cad/               printed flow-cell and tubing coupon: STL, STEP, print sheets, generator scripts
 data/              evidence for D7: labelled readings, raw logs, run results, calibration
 docs/              D1–D9 drafts, lab notebook, sensor notes, figures, photos, dashboard screenshots
-  D9-dossier/        outline of the final PDF
+  D9-dossier/        the final dossier PDF and its outline
 archive/           earlier programs, kept for reference
 config.json        alarm thresholds shared by the firmware and the service
 requirements.txt   Python packages for the laptop side
