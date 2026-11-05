@@ -87,3 +87,15 @@ the three board holes (diameter and position), which version 2 can use to hold t
 Smaller cup straight over the gas window (version 2), dilution Venturi (if the team chooses it), a
 water trap (if the kit one does not arrive), the indicator panel (light ring, frosted dome, button,
 speaker), and the board enclosure.
+
+## Option A case (print request 26 Oct 2026)
+
+The closed case the monitor has sat in since 1 Nov. `PRINT_REQUEST_optionA.pdf` is the request sent for printing. All parts PLA, 0.2 mm layers, no supports, millimetres, already placed the right way up.
+
+| File | What it is | Size (mm) | Settings |
+| --- | --- | --- | --- |
+| `T6_caseA_base_v1.step` | Case base: holds every module; the front panel carries the button, speaker grille and the VENT and SAMPLE ports | 152 × 94 × 50 | 3 walls, 20 % infill |
+| `T6_caseA_lid_v1.step` | Lid: light window, ring holder, snap fit (upside down in the file) | 152 × 94 × 6.6 | 3 walls, 20 % infill |
+| `T6_light_cap_v1.step` | Diffuses the alarm light; white or translucent PLA | 44 × 44 × 15.3 | 2 walls, open side up |
+| `T6_cell_clamp_v1.step` | Holds the flow-cell against the front panel | 49 × 41 × 8.5 | 3 walls, 20 % infill |
+| `T6_tpiece_v1.step` | Airway T-piece with 22 mm / 15 mm cones (ISO 5356-1); dropped on 26 Oct because the kit mask's connector is already a T (dossier D2) | 32 × 28 × 60 | 4 walls, 100 % infill |
