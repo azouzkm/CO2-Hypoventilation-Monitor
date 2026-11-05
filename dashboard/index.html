@@ -780,7 +780,7 @@ async function start() {
   } catch (e) {}
   poll();
   pollAlarms();
-  setInterval(poll, 1000);
+  setInterval(poll, 250);    // 4 times a second: a new reading shows within 0.25 s of reaching the laptop
   setInterval(pollAlarms, 3000);
   window.addEventListener("resize", () => { drawChart(); drawRate(); });
   requestAnimationFrame(frame);

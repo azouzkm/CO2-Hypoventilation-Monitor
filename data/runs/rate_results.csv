@@ -1,0 +1,2 @@
+date,time,label,phase,rate_per_min,seconds,shown_pct,median,min,max,right_after_s,er7,advisory_s,cleared_s,er8,valid,notes,log
+2026-11-04,20:58:45,rr-run01,1,10,120,0,--,--,--,--,FAIL,--,--,PASS,valid,no rate shown (is air moving through the cell?),rate_2026-11-04_205550_rr-run01.log

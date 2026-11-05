@@ -1,0 +1,12 @@
+recording,true_rate_per_min,peak_rate_per_min,seconds_used,why
+"2026-10-22 paced run (open air, no line)",15,15.0,61,"15 bumps, gaps CV 0.24"
+"test 5 valid run 1 (0.5 m line, sealed cell)",15,,21,fewer than 4 bumps
+"test 5 valid run 2 (0.5 m line, sealed cell)",15,,41,irregular gaps (CV 0.82)
+"test 5 valid run 3 (0.5 m line, sealed cell)",15,,30,irregular gaps (CV 0.45)
+"test 5 valid run 4 (0.5 m line, sealed cell)",15,,41,irregular gaps (CV 0.90)
+"test 5 valid run 5 (0.5 m line, sealed cell)",15,,31,irregular gaps (CV 0.57)
+"test 5 valid run 6 (0.5 m line, sealed cell)",15,,41,irregular gaps (CV 0.92)
+"test 5 valid run 7 (0.5 m line, sealed cell)",15,,41,irregular gaps (CV 0.62)
+"test 5 valid run 8 (0.5 m line, sealed cell)",15,,41,fewer than 4 bumps
+"test 5 valid run 9 (0.5 m line, sealed cell)",15,,41,irregular gaps (CV 0.56)
+"test 5 valid run 10 (0.5 m line, sealed cell)",15,,41,irregular gaps (CV 0.42)

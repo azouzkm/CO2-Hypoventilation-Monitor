@@ -1,0 +1,11 @@
+valid_run,label,end_time,present_s,present_breath,er1,absent_s,er2,peak_ppm,saturated,log
+1,t5-run01,19:01:36,6,2,PASS,24,PASS,5000,yes,run_2026-11-04_185932_t5-run01.log
+2,t5-run02,19:06:01,9,3,PASS,21,PASS,2228,no,run_2026-11-04_190357_t5-run02.log
+3,t5-run03,19:23:12,7,2,PASS,15,PASS,5000,yes,run_2026-11-04_192107_t5-run03.log
+4,t5-run04,19:27:00,7,2,PASS,15,PASS,3598,no,run_2026-11-04_192456_t5-run04.log
+5,t5-run05,19:35:35,8,3,PASS,33,FAIL,5000,yes,run_2026-11-04_193331_t5-run05.log
+6,t5-run06,19:48:16,6,2,PASS,16,PASS,3526,no,run_2026-11-04_194612_t5-run06.log
+7,t5-run07,19:51:49,7,2,PASS,13,PASS,4167,no,run_2026-11-04_194945_t5-run07.log
+8,t5-run08,19:55:44,8,3,PASS,8,PASS,3756,no,run_2026-11-04_195339_t5-run08.log
+9,t5-run09,20:00:08,7,2,PASS,9,PASS,4595,no,run_2026-11-04_195804_t5-run09.log
+10,t5-run10,20:04:08,8,3,PASS,13,PASS,3328,no,run_2026-11-04_200204_t5-run10.log

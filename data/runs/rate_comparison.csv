@@ -1,0 +1,9 @@
+measure,22 Oct bare sensor,4 Nov sampled (rate run)
+set-up,"bare sensor in open air, breath from about 15 cm, no line, no draw","0.5 m line, sealed flow-cell, tube end 15 cm, syringe about 1 mL/s"
+paced rate (breaths/min),15,10
+breathing time (s),60,120
+room level (ppm),803,1028
+peak (ppm),1816,5000
+"time at 5,000 ppm (s)",0,106
+firmware rate (spectral),"14.9-15.7 (replay, firmware v0.6)","not resolved (""breaths cut off"")"
+peak-count rate (tools/peak_rate.py),"15.0 (15 bumps, gaps CV 0.24)",not resolved (fewer than 4 bumps)
