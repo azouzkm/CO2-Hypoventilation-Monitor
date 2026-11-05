@@ -383,7 +383,7 @@ $("soundOn").addEventListener("click", () => Sound.enable());
 $("testSound").addEventListener("click", async () => { await Sound.enable(); Sound.test(); });
 
 // ---------------------------------------------------------------------------------------------
-// The state, polled from the service once a second (interface IF-8)
+// The state, polled from the service every 250 ms (interface IF-8)
 let current = { display: "WAITING" };
 let lastOk = 0;
 let lastData = null;

@@ -23,8 +23,8 @@ breath-by-breath capnograph.
 
 ## Members
 
-- Abdelaziz Mourad
-- Nyah Woller-li
+- Abdul Aziz Mourad
+- Nyah Woller-Li
 - Szirina Ismail
 - Alice She
 - Michele Frederike
