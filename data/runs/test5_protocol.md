@@ -32,7 +32,7 @@ Three mask runs and one bare-tube run at 3-5 cm on 3 Nov, 17:54-18:12, used to c
 - Valid runs are numbered 1-10 in time order in the report; the labels t5-run03/04 at 19:21 and 19:24 are valid runs 3 and 4.
 - t5-run03: peak 5,000 ppm from breath 10 to 10 s after the stop (no TECHNICAL); baseline rising about 30 ppm over the 24 s before the first cue.
 - t5-run04: peak 3,598 ppm, a plateau from breath 7 to the stop (no saturation); baseline flat about 860 ppm.
-- t5-run05: peak 5,000 ppm from just after the stop for about 27 s (no TECHNICAL); red 33 s after the stop: the ER-2 fail is caused by saturation.
+- t5-run05: at 5,000 ppm from 1 s before the stop to 28 s after (TECHNICAL top of range for 1 s at 19:35:03); red 33 s after the stop: the ER-2 fail is caused by saturation.
 - t5-run06 (valid run 6): peak 3,526 ppm, no saturation; small dip at breaths 9-10 (3,507 to 3,412) without an alarm; baseline about 985-990 ppm.
 - t5-run07 (valid run 7): peak 4,167 ppm, no saturation; baseline rising about 50 ppm over the 24 s before the first cue (room air near the tube end), which may have brought green slightly earlier.
 - t5-run08 (valid run 8): peak 3,756 ppm, no saturation; baseline flat about 880 ppm; the reading began to fall slightly from breath 9 (3,755 to 3,677 at the stop) with no alarm during breathing, which brought the red early (8 s after the stop).

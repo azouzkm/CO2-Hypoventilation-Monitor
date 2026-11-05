@@ -7,8 +7,8 @@ Terminal logs, so every number in the report can be traced back to the readings 
 | --- | --- |
 | `data/` (this folder) | Labelled datasets, one CSV per session, named `YYYY-MM-DD_what.csv` |
 | `raw/` | Terminal logs from `tools/live_co2.sh` and `tools/scripted_run.sh`, exactly as recorded |
-| `runs/` | `results.csv`: one row per scripted CR-1 run, scored against ER-1 and ER-2 by `tools/score_run.sh` |
-| `calibration/` | Readings taken against the reference, and the fit from `tools/calibration.py` |
+| `runs/` | `results.csv`: one row per scripted CR-1 run, scored against ER-1 and ER-2 by `tools/score_run.sh` (column `valid` marks excluded runs). Test 5: `test5_summary.csv` (the 10 valid runs) and `test5_protocol.md` (protocol and run notes). Test 6: `tube_length_results.csv`, `response_10_90.csv`. Breathing rate: `rate_results.csv`, `rate_run_notes.md`, `rr_replay_2026-10-22.csv`, `peak_rate_results.csv`, `rate_comparison.csv` |
+| `calibration/` | `2026-11-04_outdoor_zero.md`: one-point zero against outdoor air (NOAA reference), offset and drift. A multi-point fit against the capnograph (`tools/calibration.py`) is future work |
 
 ## 2026-10-22_session2_readings.csv
 

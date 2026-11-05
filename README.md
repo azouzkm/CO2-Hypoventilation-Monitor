@@ -10,10 +10,10 @@ while **measuring and honestly reporting its own response time**, rather than pr
 breath-by-breath capnograph.
 
 > [!IMPORTANT]
-> **What the bench shows so far:** this sensor supports a **breath-averaged trend, not
-> breath-by-breath capnography**. On 22 Oct 2026 it took 11–13 s to rise and about a minute to fall
-> after a breath, and breathing at 15 breaths/min left only about 2 ppm of ripple per breath on a
-> 1,000 ppm rise. Everything here is designed, tested and reported on that basis.
+> **What the bench shows:** this sensor supports a **breath-averaged trend, not breath-by-breath
+> capnography**. Its 10-90 % rise takes about 14 s (one breath lasts 4-6 s), and the fitted
+> MH-Z19C reads only up to **5,000 ppm** while exhaled breath is about 40,000-50,000 ppm, so an
+> undiluted sample saturates. Everything here is designed, tested and reported on that basis.
 
 > [!WARNING]
 > **Bench only.** Nothing built here goes near a patient or clinical equipment in service. No
@@ -23,25 +23,25 @@ breath-by-breath capnograph.
 
 ## Members
 
-- Abdelaziz Mourad
-- Nyah Woller-li
+- Abdul Aziz Mourad
+- Nyah Woller-Li
 - Szirina Ismail
 - Alice She
 - Michele Frederike
 - Yuhan Zhang
 
-## Where things stand (1 Nov 2026)
+## Where things stand (4 Nov 2026, submission)
 
 | Part | State |
 | --- | --- |
-| CO₂ sensor | Winsen MH-Z19C (NDIR, 400–5,000 ppm, UART) reading reliably since 22 Oct; wiring and supply checked |
-| Printed parts | Flow-cell v1 (taped, leak-tested) and the Option A case: everything sits in the case since 1 Nov, the sampling line pushes onto SAMPLE from outside. **Open: air through the cell.** Without a pump, breath does not reliably reach the sensor, and a cell full of old breath reads 5,000 ppm (1 Nov) |
-| Firmware | **v0.6 on the board (1 Nov):** CR-1 (CO₂ present/absent), the four alarm states, CR-4 breathing rate and ADVISORY, the CR-3 safety clip (tube off = TECHNICAL "LINE OFF" in about 1 s, tested at the bench), a reading stuck at 5,000 ppm = TECHNICAL, and the JSON link to the dashboard |
-| Light ring, speaker, button | Wired and working. The speaker is driven straight from the pin through a resistor (quiet): the amplifier, tried unsoldered on 26 Oct, needs its pins soldered (one pin made no contact) |
-| Service, database, dashboard | **Built 26 Oct:** `bash tools/dashboard.sh` shows the box's state live in the browser, with the same light and sounds, acknowledge with initials (sent to the box), a Technical alarm when data stops, the CO₂ trend and the alarm log, all saved in SQLite. Tested on the recorded 25 Oct alarm test; first live try with the board next |
-| Messages to phones | **Built 27 Oct:** a sign-up page (WhatsApp, Signal or Telegram through CallMeBot, consent time stored) and the messages of workshop slide 11: Critical at once and again at 2 minutes if nobody acknowledges, Advisory and Technical after a minute, with retries, and failures shown on the dashboard. Tested with a stand-in for CallMeBot; first real message next |
-| Bench tools | Dashboard, live view, and scripted CR-1 runs with spoken cues, scored against ER-1 and ER-2 |
-| Tests | 88 firmware tests, plus the service and phone-message tests, run by GitHub on every pull request |
+| CO₂ sensor | Winsen MH-Z19C (NDIR, 0-5,000 ppm version, UART, 1 reading/s). Zero checked against outdoor air on 4 Nov: offset +294 ppm, corrected in the analysis (`data/calibration/`) |
+| Gas path (bench) | Sampling line (0.5 m for the scored runs; 1 and 2.1 m measured) on SAMPLE of a sealed printed flow-cell; a 200 mL syringe on VENT draws the sample at about 2 mL/s. Designed next step: a small pump at a fixed flow and a fixed room-air dilution (see D2 in the dossier) |
+| Firmware | v0.6 on the board: CR-1 present/absent, the four alarm states, CR-4 breathing rate and ADVISORY, the CR-3 safety clip (line off = TECHNICAL), top of range for 30 s = TECHNICAL, the JSON link to the dashboard |
+| Light ring, speaker, button | Working. The speaker is driven from the pin through a resistor (quiet; the amplifier needs soldering) |
+| Service, database, dashboard | `bash tools/dashboard.sh`: live state with the same light and sounds, acknowledge with initials (sent to the box), Technical alarm when data stops, CO₂ and breathing-rate trends, alarm log, all saved in SQLite; refreshes 4 times a second. Screenshots of every state: [docs/screenshots/](docs/screenshots/) |
+| Messages to phones | Telegram through CallMeBot to every registered participant (consent time stored): 116 critical messages on the bench, median 1.4 s, slowest 3.2 s |
+| Bench tools | Scripted CR-1 runs (`tools/scripted_run.sh`), paced breathing-rate runs (`tools/rate_run.sh`), offline peak-count rate (`tools/peak_rate.py`), live view, replay |
+| Tests | 134 automated tests (firmware logic, service, notifier, scoring), run by GitHub on every pull request |
 
 Session-by-session record: [docs/lab-notebook.md](docs/lab-notebook.md).
 
@@ -50,43 +50,38 @@ Session-by-session record: [docs/lab-notebook.md](docs/lab-notebook.md).
 Traceability decides most of the marks: every engineering requirement (ER) names the clinical
 requirement (CR) it serves, and every verification result names the ER it closes.
 
-| CR | Clinical requirement (project card) | Progress |
+| CR | Clinical requirement (project card) | Result (bench) |
 | --- | --- | --- |
-| CR&#8209;1 | Presence or absence of exhaled CO₂ confirmed within a stated number of breaths and displayed unambiguously | ER-1 (present within 3 breaths) and ER-2 (absent within 30 s) drafted and built into the firmware (v0.4 on the board), shown on the box and, since 26 Oct, on the dashboard; the flow-cell is printed and sealed, and the counted verification runs wait on airflow through it |
-| CR&#8209;2 | Loss of CO₂ while the circuit reads connected raises an immediate alarm | Critical alarm (red, 10 pulses, latched until the button) built and tried at the bench on 25 Oct, and mirrored on the dashboard with its sound and acknowledge, and messaged to phones at once (again at 2 minutes if nobody acknowledges); ERs to draft; "circuit connected" needs the break-wire loop |
-| CR&#8209;3 | A blocked or disconnected sampling line is reported as a fault and never presents as apnoea | Sensor faults (no answer, stuck at 400, impossible jumps) raise Technical, never Critical: tried at the bench with a pulled data wire, and replayed on the 22 Oct glitches; a lost USB link is Technical on the dashboard too; a disconnected line: safety clip built and tested 1 Nov (TECHNICAL "LINE OFF" in about 1 s, never CRITICAL); a blocked line needs airflow or a water-trap probe; ERs to draft |
-| CR&#8209;4 | Breathing rate from the CO₂ signal recorded through the procedure, with alarms on a sustained fall | ER-7 and ER-8 drafted; rate and ADVISORY in firmware v0.6; bench runs need airflow (`tools/rate_run.sh`) |
+| CR&#8209;1 | Presence or absence of exhaled CO₂ confirmed within a stated number of breaths and displayed unambiguously | **Met.** ER-1: CO₂ present within 3 breaths in 10 of 10 scripted runs (6-9 s, 0.5 m line); a 2 m line adds about 16 s (test 6) |
+| CR&#8209;2 | Loss of CO₂ while the circuit reads connected raises an immediate alarm | **Met, one explained fail.** ER-2: red within 30 s of the last breath in 9 of 10 runs (median 15 s); the one fail (33 s) was while the sensor sat at its 5,000 ppm limit. Phones within 3.2 s; the box keeps alarming without the laptop |
+| CR&#8209;3 | A blocked or disconnected sampling line is reported as a fault and never presents as apnoea | **Partly met.** Disconnected line: cyan "Line off" at once, never red (ER-5, tests 2 and 3). Blocked line: shown as CO₂ lost (ER-6, test 4): no flow or pressure sensing in the kit; designed fix in the dossier |
+| CR&#8209;4 | Breathing rate from the CO₂ signal recorded through the procedure, with alarms on a sustained fall | **Partly met.** Rate recorded with every reading; resolved when breaths reach the sensor directly (22 Oct: 14.9-15.7/min, 15.0/min by peak counting, true 15/min), "not resolved" through the line and sealed cell, never a wrong rate. ADVISORY verified in simulation and recorded once on the bench (3 Nov) |
 
 | | Deliverable | Marks | Where it lives |
 | --- | --- | --- | --- |
-| D1 | Engineering requirements | 10 | [docs/D1-engineering-requirements.md](docs/D1-engineering-requirements.md) (draft) |
-| D2 | System design | 5 | `docs/D2-system-design.md` (to write) |
-| D3 | Component, module and system chart | 10 | `docs/D3-components-interfaces.md` (to write) |
-| D4 | System diagram set | 5 | `docs/diagrams/` (to draw) |
-| D5 | Working system and documentation | 35 | [firmware/](firmware/), [service/](service/), [dashboard/](dashboard/), [hardware/](hardware/), [tools/](tools/) and this README |
-| D6 | Verification plan | 5 | [docs/D6-verification-plan.md](docs/D6-verification-plan.md) (draft, CR-1 first) |
-| D7 | Verification report | 10 | `docs/D7-verification-report.md` (to write), with the evidence in [data/](data/) |
-| D8 | Failure modes and mitigation | 10 | `docs/D8-failure-modes.md` (to write); candidates in the [lab notebook](docs/lab-notebook.md) |
-| D9 | Design dossier (one PDF) | 10 | [docs/D9-dossier/](docs/D9-dossier/) (outline) |
+| D1-D4, D6-D9 | Requirements, system design, component chart, diagram set, verification plan and report, failure modes, dossier | 65 | The design dossier PDF (submitted); drafts and outline in [docs/](docs/) and [docs/D9-dossier/](docs/D9-dossier/) |
+| D5 | Working system and documentation | 35 | [firmware/](firmware/), [service/](service/), [dashboard/](dashboard/), [hardware/](hardware/), [tools/](tools/), this README and the live demonstration |
+| Evidence | Raw logs, run results, calibration, figures | | [data/](data/) (`data/raw/`, `data/runs/`, `data/calibration/`), [docs/figures/](docs/figures/), [docs/screenshots/](docs/screenshots/) |
 
 Progress and the order of work: [docs/deliverables.md](docs/deliverables.md).
 
 ## Response time, measured
 
-The project card asks the device to measure and publish its own response time. First numbers, in
-open air about 15 cm from the sensor, before the flow-cell and sampling line exist:
+The project card asks the device to measure and publish its own response time.
 
-| Test (22 Oct 2026) | Rise 10–90 % | Fall 90–10 % | Back near room air |
+| Sampling line (test 6, sealed cell, one breath, about 2 mL/s) | Breath reaches the sensor | CO₂ present | Red after the breath |
 | --- | --- | --- | --- |
-| Single breath 1 | 12.7 s | 51 s | 81 s |
-| Single breath 2 | 10.6 s | 66 s | 93 s |
-| 15 breaths/min for 1 min | 31 s (whole run) | 71 s | 89 s after the last breath |
+| 0.5 m | 6.7 s | 7.3 s | 39.7 s |
+| 1 m | 17.0 s | 18.0 s | 50.3 s |
+| 2.1 m | 20.3 s | 23.3 s | 56.7 s |
 
-![Rhythmic breathing run: one smooth rise of about 1,000 ppm and no breath-by-breath waveform](docs/figures/2026-10-22_rhythmic-run-1.png)
+The 10-90 % rise is about 14 s (11-17 s) at every length: the tube adds delay, the sensor sets the
+speed. In open air on 22 Oct (bare sensor, no line) it was 10.6-12.7 s.
 
-Next: repeat the runs through the printed flow-cell and sampling line, and measure how the delay
-grows with line length (0.5, 1 and 2 m). Data in [data/](data/); method and notes in the
-[lab notebook](docs/lab-notebook.md).
+![Breath ripple: bare sensor (22 Oct) against the sampled path (4 Nov)](docs/figures/2026-11-04_rate_bare_vs_sampled.png)
+
+Data: [data/runs/](data/runs/) (`tube_length_results.csv`, `response_10_90.csv`, `test5_summary.csv`);
+method and notes in the [lab notebook](docs/lab-notebook.md).
 
 ## How it works
 
@@ -94,23 +89,24 @@ grows with line length (0.5, 1 and 2 m). Data in [data/](data/); method and note
 flowchart TB
     subgraph rig["Bench gas path"]
         direction LR
-        lung["Test lung<br/>or mask"] --> line["Sampling line<br/>and water trap"]
-        line --> cell["Printed<br/>flow-cell"]
+        mouth["Breath at the<br/>tube end"] --> line["Sampling line<br/>(safety clip)"]
+        line --> cell["Printed sealed<br/>flow-cell"]
         cell --> sensor["MH-Z19C<br/>NDIR CO₂ sensor"]
+        cell --> draw["Syringe on VENT<br/>(pump planned)"]
         ref["Sim-lab capnograph<br/>(reference)"] -.->|calibration only| line
     end
     rig -->|"UART, 1 reading/s"| pico["Pico 2 W<br/>light, speaker, button"]
     pico <-->|"USB serial: readings,<br/>acknowledge back"| laptop
     subgraph laptop["Laptop"]
         direction LR
-        svc["Service<br/>SQLite database"] <-->|"HTTP, 1/s"| dash["Browser dashboard<br/>sound, acknowledge"]
-        svc -->|HTTP alert| phone["Registered phone"]
+        svc["Service<br/>SQLite database"] <-->|"HTTP, 4/s"| dash["Browser dashboard<br/>sound, acknowledge"]
+        svc -->|HTTP alert| phone["Registered phones<br/>(Telegram)"]
     end
     classDef planned stroke-dasharray: 5 4
-    class lung,line,cell,phone,ref planned
+    class ref planned
 ```
 
-Solid boxes work on the bench today; dashed boxes are designed, on order or exist as skeletons.
+Solid boxes work on the bench; the dashed box (the capnograph) was planned as the calibration reference and was not available before submission.
 By design the board raises its alarms by itself, so a crashed laptop can never silence it; the
 laptop adds the database, the dashboard and the messages. The dashboard shows what the board
 decided and adds one alarm of its own: Technical when no data arrives from the board for 5 s.
@@ -129,31 +125,32 @@ The four states required by the project card (Figure 3):
 **Golden rule (CR-3):** a blocked line or a fault is *Technical*, never presented as apnoea
 (*Critical*).
 
-Since 25 Oct the board runs these states on the light ring and the speaker (firmware v0.4): Critical
-when CO₂ is lost after it was present, Technical for any sensor problem, plus a Standby state
-before the first breath. Advisory is built in but waits for the breathing-rate rule (CR-4), and
-until the break-wire loop exists the sampling line is taken as connected. See
+The board runs all four states on the light ring and the speaker (firmware v0.6), plus a Standby
+state before the first breath: Critical when CO₂ is lost after it was present, Advisory on a
+sustained slow fall of the breath-averaged CO₂ (or of the breathing rate, when it can be resolved),
+Technical for a disconnected sampling line (safety clip), a sensor fault, or a reading held at the
+top of the scale for 30 s. See
 [firmware/README.md](firmware/README.md). The dashboard repeats each state with the same light
 pattern and sound ([dashboard/README.md](dashboard/README.md)). The thresholds for the board and the
 service are meant to live in one file, [config.json](config.json), so the two can never disagree
-about what counts as an alarm. Its values are placeholders until calibration; the service reads its
-link timeout from it, and the CR-1 numbers still sit in [firmware/lib/cr1.py](firmware/lib/cr1.py).
+about what counts as an alarm. The alarms work on changes in the reading, so the sensor's measured zero offset (+294 ppm) does not
+affect them; the service reads its link timeout from it, and the CR-1 numbers still sit in [firmware/lib/cr1.py](firmware/lib/cr1.py).
 
 ## What's in this repository
 
 ```text
 firmware/          Pico 2 W code: everything inside goes onto the CIRCUITPY drive
-  code.py            main program, monitor v0.5 (CR-1, the four alarm states, the link to the laptop)
+  code.py            main program, monitor v0.6 (CR-1, the four alarm states, CR-4 rate and advisory, safety clip, link)
   boot.py            power-up sensor check, result written to boot_out.txt
   lib/               sensor driver, CR-1 logic, alarm states, event timing, light ring, speaker and button
 service/           laptop service: reads the board over USB, SQLite database, link watchdog, REST API
 dashboard/         browser dashboard: the box's state live, alarm sounds, acknowledge, trend, alarm log
-tools/             dashboard start script, live view, scripted CR-1 runs and their scoring, calibration fit
+tools/             dashboard start script, live view, scripted CR-1 and breathing-rate runs, scoring, peak-count rate
 tests/             pytest tests; several replay the real 22 and 25 Oct readings
 hardware/          wiring, bill of materials, wiring pictures, soldering guide
   cad/               printed flow-cell and tubing coupon: STL, STEP, print sheets, generator scripts
 data/              evidence for D7: labelled readings, raw logs, run results, calibration
-docs/              D1–D9 write-ups, lab notebook, sensor notes, figures, photos
+docs/              D1–D9 drafts, lab notebook, sensor notes, figures, photos, dashboard screenshots
   D9-dossier/        outline of the final PDF
 archive/           earlier programs, kept for reference
 config.json        alarm thresholds shared by the firmware and the service
@@ -186,9 +183,16 @@ from this folder.
    To get the alarms on your phone too, sign up at <http://localhost:8000/register> (WhatsApp,
    Signal or Telegram, through CallMeBot). For plain text in Terminal instead of the dashboard:
    `bash tools/live_co2.sh` (one at a time: both read the same port).
-4. **Run a scripted CR-1 run:** `bash tools/scripted_run.sh --label test01` gives spoken cues and
-   scores the run against ER-1 and ER-2. See [tools/README.md](tools/README.md).
-5. **Run the tests** (after step 3 has created `.venv/`):
+4. **Set up the gas path:** push the sampling line onto **SAMPLE** with the safety-clip plug on
+   it (otherwise the box shows cyan "Line off"), and the syringe onto **VENT**. Finger test: with
+   a finger over the tube end the syringe must be hard to pull. Pull steadily, about 10 mL every
+   5 s, and empty the syringe off the line, never back through the box.
+5. **Run a scripted CR-1 run:** `bash tools/scripted_run.sh --rate 15 --breaths 10 --rest 60 --label test01`
+   gives spoken cues and scores the run against ER-1 and ER-2 (protocol:
+   [data/runs/test5_protocol.md](data/runs/test5_protocol.md)). Paced breathing-rate runs:
+   `bash tools/rate_run.sh --plan 10:120 --rest 30 --label rr01`; offline rate by peak counting:
+   `python3 tools/peak_rate.py`. See [tools/README.md](tools/README.md).
+6. **Run the tests** (after step 3 has created `.venv/`):
 
    ```bash
    .venv/bin/python -m pip install -r requirements.txt
@@ -208,6 +212,9 @@ The messages a new user is most likely to see:
 | `Port 8000 is taken: is the dashboard already running in another Terminal window?` | A dashboard (or another program) already uses port 8000 | Use the window that runs it, stop it with Ctrl-C, or start with `--http-port 8001` |
 | The dashboard says a message *could not be sent* | CallMeBot refused it (key not activated, or the Telegram bot not started) or could not be reached | The reason is on the Phone alerts page (<http://localhost:8000/register>); fix it there and press **Send a test** |
 | `>>> SENSOR FAULT: reading stuck at 400 ppm: check the brown calibration wire <<<` | The sensor's brown calibration (HD) wire touched ground, which re-zeroes it | Insulate the brown wire's tip and keep it off metal, including the laptop's case. Treat the first 3 minutes of readings after a fault as untrustworthy |
+| **Sampling line disconnected** (cyan, "Line off") | The safety clip on the sampling line is open | Push the tube back onto SAMPLE with the safety-clip plug on it |
+| **Sensor problem: reading at the top of the scale (5,000 ppm) for 30 s** (cyan) | The sensor is saturated: undiluted breath is far above its 5,000 ppm range, so it cannot see breaths | Flush the cell with room air (syringe, tube end away from faces), and keep the tube end farther from the mouth |
+| A flat **500 ppm** and "Warming up" after plugging in | The sensor's warm-up placeholder, not a measurement | Wait 1-3 minutes for real readings |
 | `CO2: NO REPLY either way` in `boot_out.txt` | The sensor didn't answer at power-up | Check red to 5V and black to GND first (no power, no reply), then the blue and green data wires; reseat the leads |
 
 ## Working together

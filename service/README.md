@@ -107,7 +107,7 @@ this laptop and git ignores it: it holds phone numbers and CallMeBot keys. The r
 
 No patient identifiers go into any table.
 
-**IF-8, service → dashboard:** HTTP on localhost, JSON, polled once a second.
+**IF-8, service → dashboard:** HTTP on localhost, JSON, polled every 250 ms (4 times a second).
 
 | Request | Answer |
 | --- | --- |
