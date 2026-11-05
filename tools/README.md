@@ -13,6 +13,7 @@ on its first run. Only one program can hold the serial port at a time: the dashb
 | `score_run.sh` | Scores a run log again (for example with different acceptance numbers) |
 | `rate_run.sh` | One paced-breathing run for CR-4 with spoken cues, in phases (default 15 → 6 → 15 breaths/min, `--plan 15:150,6:150,15:120`), scored at the end by `score_rate_run.py` for ER-7 (rate shown) and ER-8 (advisory on slowing), into `data/runs/rate_results.csv`. Needs air moving through the cell |
 | `score_rate_run.py` | Scores a paced run log again: `python3 tools/score_rate_run.py data/raw/rate_<date>.log` |
+| `peak_rate.py` | Offline breathing rate by peak counting (CR-4, ER-7): counts the one-per-breath bumps in the slope of the CO₂ reading, rate = 60 / median gap; says "not resolved" when the bumps are too few or irregular. `python3 tools/peak_rate.py` runs it on the 22 Oct paced run and every test 5 run, into `data/runs/peak_rate_results.csv`. Not used live by the device |
 | `calibration.py` | Calibration fit (slope, intercept, RMS residual) and 10–90 % response time, for D7. Python with numpy and matplotlib (`python3 -m pip install -r requirements.txt`); placeholder data until the reference sessions |
 
 ## The dashboard
